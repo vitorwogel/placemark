@@ -23,7 +23,7 @@
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarAdd"
+                android:id="@+id/toolbarCancel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:titleTextColor="@color/colorPrimary" />
@@ -79,6 +79,7 @@
                     android:layout_height="match_parent">
 
                 </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
         </ScrollView>
 

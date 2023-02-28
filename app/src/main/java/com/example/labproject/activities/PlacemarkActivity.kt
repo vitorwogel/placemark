@@ -1,7 +1,13 @@
 package com.example.labproject.activities
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.labproject.R
 import com.example.labproject.databinding.ActivityPlacemarkBinding
 import com.example.labproject.main.MainApp
 import com.example.labproject.models.PlacemarkModel
@@ -17,6 +23,9 @@ class PlacemarkActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPlacemarkBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.toolbarCancel.title = title
+        setSupportActionBar(binding.toolbarCancel)
 
         app = application as MainApp
         i("Placemark Activity started...")
@@ -39,7 +48,27 @@ class PlacemarkActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_cancel, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_cancel -> {
+                val launcherIntent = Intent(this, PlacemarkListActivity::class.java)
+                getResult.launch(launcherIntent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private val getResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            finish()
+        }
 }
 
 
