@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.labproject.databinding.CardPlacemarkBinding
 import com.example.labproject.models.PlacemarkModel
+import com.squareup.picasso.Picasso
 
 class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
                                    private val listener: PlacemarkListener) :
@@ -27,12 +28,15 @@ class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
     class MainHolder(private val binding : CardPlacemarkBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+
         fun bind(placemark: PlacemarkModel, listener: PlacemarkListener) {
             binding.placemarkTitle.text = placemark.title
             binding.description.text = placemark.description
-            binding.imageView.setImageURI(placemark.image)
+            Picasso.get().load(placemark.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onPlacemarkClick(placemark) }
         }
+
+
     }
 }
 
